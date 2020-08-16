@@ -10,12 +10,12 @@ namespace CDDC.Compress
 {
     public class CD7ZipProgress
     {
-        public double PercentDone { get; internal set; }
+        public float PercentDone { get; internal set; }
         public bool IsFinished { get; internal set; }
     }
     public static class CD7Zip
     {
-        public static void Compress(string fileName, Stream archive, Stream file, EventHandler<CD7ZipProgress> progress)
+        public static void Compress(string fileName, Stream archive, Stream file, IProgress<CD7ZipProgress> progress)
         {
             var comp = new SevenZipCompressor
             {
@@ -27,19 +27,19 @@ namespace CDDC.Compress
 
             comp.Compressing += (s, e) =>
             {
-                progress(s, new CD7ZipProgress
+                progress.Report(new CD7ZipProgress
                 {
                     PercentDone = e.PercentDone
                 });
             };
 
             
-            comp.CompressionFinished += (s, e) => progress(s, new CD7ZipProgress { IsFinished = true, PercentDone = 100 });
+            comp.CompressionFinished += (s, e) => progress.Report(new CD7ZipProgress { IsFinished = true, PercentDone = 100 });
 
             comp.BeginCompressStream(archive, file);
         }
 
-        public static void CompressFiles(Stream archive, string[] files, EventHandler<CD7ZipProgress> progress)
+        public static void CompressFiles(Stream archive, string[] files, IProgress<CD7ZipProgress> progress)
         {
             var comp = new SevenZipCompressor
             {
@@ -51,14 +51,14 @@ namespace CDDC.Compress
 
             comp.Compressing += (s, e) =>
             {
-                progress(s, new CD7ZipProgress
+                progress.Report(new CD7ZipProgress
                 {
                     PercentDone = e.PercentDone
                 });
             };
 
 
-            comp.CompressionFinished += (s, e) => progress(s, new CD7ZipProgress { IsFinished = true, PercentDone = 100 });
+            comp.CompressionFinished += (s, e) => progress.Report(new CD7ZipProgress { IsFinished = true, PercentDone = 100 });
 
             comp.BeginCompressFiles(archive, files);
         }
