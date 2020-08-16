@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -83,6 +84,10 @@
     <ProjectReference Include="..\Shared\Compress\Compress.csproj">
       <Project>{53fa13d8-2c1e-4dbc-bc7f-ab81f263a57c}</Project>
       <Name>Compress</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shared\Models\Models.csproj">
+      <Project>{1ec57724-be46-41d3-8c6a-ffe35ee7b92b}</Project>
+      <Name>Models</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

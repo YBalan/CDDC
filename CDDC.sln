@@ -9,6 +9,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{67101F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Compress", "Shared\Compress\Compress.csproj", "{53FA13D8-2C1E-4DBC-BC7F-AB81F263A57C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Models", "Models", "{3EFF1ABC-E71F-4513-807F-41007ACD880C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Shared\Models\Models.csproj", "{1EC57724-BE46-41D3-8C6A-FFE35EE7B92B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,12 +27,17 @@ Global
 		{53FA13D8-2C1E-4DBC-BC7F-AB81F263A57C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53FA13D8-2C1E-4DBC-BC7F-AB81F263A57C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53FA13D8-2C1E-4DBC-BC7F-AB81F263A57C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EC57724-BE46-41D3-8C6A-FFE35EE7B92B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EC57724-BE46-41D3-8C6A-FFE35EE7B92B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EC57724-BE46-41D3-8C6A-FFE35EE7B92B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EC57724-BE46-41D3-8C6A-FFE35EE7B92B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{53FA13D8-2C1E-4DBC-BC7F-AB81F263A57C} = {67101FA8-2CED-48C1-A7D4-260107AD18EF}
+		{1EC57724-BE46-41D3-8C6A-FFE35EE7B92B} = {3EFF1ABC-E71F-4513-807F-41007ACD880C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DC920311-5008-4541-B117-D131891548A8}
