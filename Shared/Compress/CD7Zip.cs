@@ -9,19 +9,58 @@ using System.Threading.Tasks;
 namespace CDDC.Compress
 {
     public class CD7ZipProgress
-    {        
+    {
         public double PercentDone { get; internal set; }
+        public bool IsFinished { get; internal set; }
     }
     public static class CD7Zip
     {
-        public static void Compress(Stream streamIn, Stream streamOut, EventHandler<CD7ZipProgress> progress)
+        public static void Compress(string fileName, Stream archive, Stream file, EventHandler<CD7ZipProgress> progress)
         {
             var comp = new SevenZipCompressor
             {
                 CompressionLevel = CompressionLevel.High,
-                
+                CompressionMethod = CompressionMethod.Lzma,
+                ArchiveFormat = OutArchiveFormat.SevenZip,
+                DefaultItemName = fileName,
             };
-            SevenZipCompressor.CompressStream(streamIn, streamOut, (int)streamIn.Length, (s, e) => { progress(s, new CD7ZipProgress { PercentDone = e.PercentDone }); });
+
+            comp.Compressing += (s, e) =>
+            {
+                progress(s, new CD7ZipProgress
+                {
+                    PercentDone = e.PercentDone
+                });
+            };
+
+            
+            comp.CompressionFinished += (s, e) => progress(s, new CD7ZipProgress { IsFinished = true, PercentDone = 100 });
+
+            comp.BeginCompressStream(archive, file);
+        }
+
+        public static void CompressFiles(Stream archive, string[] files, EventHandler<CD7ZipProgress> progress)
+        {
+            var comp = new SevenZipCompressor
+            {
+                CompressionLevel = CompressionLevel.High,
+                CompressionMethod = CompressionMethod.Lzma,
+                ArchiveFormat = OutArchiveFormat.SevenZip,
+                //DefaultItemName = fileName,
+            };
+
+            comp.Compressing += (s, e) =>
+            {
+                progress(s, new CD7ZipProgress
+                {
+                    PercentDone = e.PercentDone
+                });
+            };
+
+
+            comp.CompressionFinished += (s, e) => progress(s, new CD7ZipProgress { IsFinished = true, PercentDone = 100 });
+
+            comp.BeginCompressFiles(archive, files);
         }
     }
 }
