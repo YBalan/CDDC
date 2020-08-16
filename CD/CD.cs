@@ -92,16 +92,16 @@ namespace CD
                 };
 
 
-                await Task.Run(async () =>
+                var parallelResult = await Task.Run(async () =>
                 {                    
-                    var parallelLoopResult = Parallel.ForEach(files, options,
+                    var result = Parallel.ForEach(files, options,
                         (fi, ls, index) =>
                         {
                             
                         }
                         );
 
-                    if (parallelLoopResult.IsCompleted && !token.IsCancellationRequested)
+                    if (Settings.Archive && result.IsCompleted && !token.IsCancellationRequested)
                     {
                         IProgress<CD7ZipProgress> archiveProgress = new Progress<CD7ZipProgress>(p => { pProgress.Value = (int)p.PercentDone; lPercentage.Text = p.PercentDone.ToString() + "%"; });
                         await Task.Run(() =>
@@ -112,6 +112,7 @@ namespace CD
                             }
                         }, cts.Token);
                     }
+                    return result;
                 }, cts.Token);
             }
             //
