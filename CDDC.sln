@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.572
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CD", "CD\CD.csproj", "{091011B8-EB67-4696-9640-43BD1AE204B8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{67101FA8-2CED-48C1-A7D4-260107AD18EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Compress", "Shared\Compress\Compress.csproj", "{53FA13D8-2C1E-4DBC-BC7F-AB81F263A57C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{091011B8-EB67-4696-9640-43BD1AE204B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{091011B8-EB67-4696-9640-43BD1AE204B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{091011B8-EB67-4696-9640-43BD1AE204B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{091011B8-EB67-4696-9640-43BD1AE204B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53FA13D8-2C1E-4DBC-BC7F-AB81F263A57C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53FA13D8-2C1E-4DBC-BC7F-AB81F263A57C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53FA13D8-2C1E-4DBC-BC7F-AB81F263A57C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53FA13D8-2C1E-4DBC-BC7F-AB81F263A57C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{53FA13D8-2C1E-4DBC-BC7F-AB81F263A57C} = {67101FA8-2CED-48C1-A7D4-260107AD18EF}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DC920311-5008-4541-B117-D131891548A8}
+	EndGlobalSection
+EndGlobal
