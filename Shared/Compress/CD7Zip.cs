@@ -59,7 +59,7 @@ namespace CDDC.Compress
 
 
             comp.CompressionFinished += (s, e) => progress.Report(new CD7ZipProgress { IsFinished = true, PercentDone = 100 });
-
+                        
             comp.BeginCompressFiles(archive, files);
         }
     }

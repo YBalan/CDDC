@@ -1,4 +1,5 @@
-﻿using Models;
+﻿using CDDC.Compress;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -60,15 +61,65 @@ namespace CD
 
         private async void bRun_Click(object sender, EventArgs e)
         {
-            IProgress<float> progress = new Progress<float>(value => { pProgress.Value = (int)value; lPercentage.Text = value.ToString() + "%"; });
-            await Task.Run(() =>
+            //IProgress<float> progress = new Progress<float>(value => { pProgress.Value = (int)value; lPercentage.Text = value.ToString() + "%"; });
+            //await Task.Run(() =>
+            //{
+            //    for (float i = 0; i <= 100; i++)
+            //    {
+            //        Thread.Sleep(25);
+            //        if (pProgress.InvokeRequired)
+            //        {
+            //            pProgress.Invoke(new Action(() => pProgress.Value = (int)i));
+            //            pProgress.Invoke(new MethodInvoker(() => pProgress.Value = (int)i));
+            //        }
+            //        progress.Report(i);
+            //    }
+            //});
+
+            if (ValidateSettings())
             {
-                for (float i = 0; i <= 100; i += 0.5f)
+                var recursivly = false;
+                var files = Directory.GetFiles(Settings.DataFolder, "*.txt", recursivly ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly).
+                            Select(f => new FileInfo(f)).Where(fi => fi.Length <= Settings.DataSize).AsParallel();
+
+                var cts = new CancellationTokenSource();
+                var token = cts.Token;
+
+                var options = new ParallelOptions
                 {
-                    Thread.Sleep(25);
-                    progress.Report(i);
-                }
-            });
+                    CancellationToken = cts.Token,
+                    MaxDegreeOfParallelism = int.MaxValue,
+                };
+
+
+                await Task.Run(async () =>
+                {                    
+                    var parallelLoopResult = Parallel.ForEach(files, options,
+                        (fi, ls, index) =>
+                        {
+                            
+                        }
+                        );
+
+                    if (parallelLoopResult.IsCompleted && !token.IsCancellationRequested)
+                    {
+                        IProgress<CD7ZipProgress> archiveProgress = new Progress<CD7ZipProgress>(p => { pProgress.Value = (int)p.PercentDone; lPercentage.Text = p.PercentDone.ToString() + "%"; });
+                        await Task.Run(() =>
+                        {
+                            using (var archive = new FileStream("CD.dat", FileMode.OpenOrCreate))
+                            {
+                                CD7Zip.CompressFiles(archive, files.Select(fi => fi.FullName).ToArray(), archiveProgress);
+                            }
+                        }, cts.Token);
+                    }
+                }, cts.Token);
+            }
+            //
+        }
+
+        private bool ValidateSettings()
+        {
+            throw new NotImplementedException();
         }
 
         private void bCancel_Click(object sender, EventArgs e)

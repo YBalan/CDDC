@@ -23,6 +23,7 @@ namespace Models
         public bool Archive { get; set; }
         [XmlAttribute]
         public bool Statistic { get; set; }
+        public long DataSize { get; set; }
 
         public bool Serialize(string settingsFile)
         {

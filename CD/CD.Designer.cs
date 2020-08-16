@@ -44,6 +44,7 @@
             this.chkSubtract = new System.Windows.Forms.CheckBox();
             this.chkChange = new System.Windows.Forms.CheckBox();
             this.dlgDataFolder = new System.Windows.Forms.FolderBrowserDialog();
+            this.pCommon = new System.Windows.Forms.Panel();
             this.gSettings.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -124,11 +125,12 @@
             // 
             this.lPercentage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lPercentage.AutoSize = true;
-            this.lPercentage.Location = new System.Drawing.Point(767, 303);
+            this.lPercentage.Location = new System.Drawing.Point(761, 303);
             this.lPercentage.Name = "lPercentage";
-            this.lPercentage.Size = new System.Drawing.Size(15, 13);
+            this.lPercentage.Size = new System.Drawing.Size(21, 13);
             this.lPercentage.TabIndex = 5;
-            this.lPercentage.Text = "%";
+            this.lPercentage.Text = "0%";
+            this.lPercentage.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // tDataSize
             // 
@@ -213,6 +215,15 @@
             // 
             this.dlgDataFolder.ShowNewFolderButton = false;
             // 
+            // pCommon
+            // 
+            this.pCommon.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pCommon.Location = new System.Drawing.Point(12, 12);
+            this.pCommon.Name = "pCommon";
+            this.pCommon.Size = new System.Drawing.Size(775, 202);
+            this.pCommon.TabIndex = 9;
+            // 
             // CD
             // 
             this.AcceptButton = this.bRun;
@@ -230,6 +241,7 @@
             this.Controls.Add(this.lDataLength);
             this.Controls.Add(this.tDataFolder);
             this.Controls.Add(this.bDataFolder);
+            this.Controls.Add(this.pCommon);
             this.MinimumSize = new System.Drawing.Size(815, 488);
             this.Name = "CD";
             this.ShowIcon = false;
@@ -261,6 +273,7 @@
         private System.Windows.Forms.CheckBox chkArchive;
         private System.Windows.Forms.CheckBox chkSubtract;
         private System.Windows.Forms.CheckBox chkChange;
+        private System.Windows.Forms.Panel pCommon;
     }
 }
 
