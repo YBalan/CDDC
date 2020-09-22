@@ -1,17 +1,18 @@
 ﻿using SevenZip;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CDDC.Compress
 {
-    public class CD7ZipProgress
+    public class CD7ZipProgress : Progress<CD7ZipProgress>
     {
         public float PercentDone { get; internal set; }
         public bool IsFinished { get; internal set; }
+
+        protected override void OnReport(CD7ZipProgress value)
+        {
+            base.OnReport(value);
+        }
     }
     public static class CD7Zip
     {
@@ -33,7 +34,7 @@ namespace CDDC.Compress
                 });
             };
 
-            
+
             comp.CompressionFinished += (s, e) => progress.Report(new CD7ZipProgress { IsFinished = true, PercentDone = 100 });
 
             comp.BeginCompressStream(archive, file);
@@ -59,7 +60,7 @@ namespace CDDC.Compress
 
 
             comp.CompressionFinished += (s, e) => progress.Report(new CD7ZipProgress { IsFinished = true, PercentDone = 100 });
-                        
+
             comp.BeginCompressFiles(archive, files);
         }
     }
